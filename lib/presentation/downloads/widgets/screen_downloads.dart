@@ -24,7 +24,7 @@ class ScreenDownloads extends StatelessWidget {
             ),
             preferredSize: Size.fromHeight(50)),
         body: ListView.separated(
-          padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             itemBuilder: (ctx, index) => _widgetList[index],
             separatorBuilder: (ctx, index) => SizedBox(
                   height: 25,
@@ -76,19 +76,19 @@ class Section2 extends StatelessWidget {
               ),
               DownloadsImageWidget(
                 imageList: imageList[0],
-                margin: EdgeInsets.only(left: 170,top: 50 ),
+                margin: EdgeInsets.only(left: 170, top: 50),
                 angle: 25,
                 size: Size(size.width * 0.35, size.width * 0.55),
               ),
               DownloadsImageWidget(
                 imageList: imageList[1],
-                margin: EdgeInsets.only(right: 170,top: 50),
+                margin: EdgeInsets.only(right: 170, top: 50),
                 angle: -25,
                 size: Size(size.width * 0.35, size.width * 0.55),
               ),
               DownloadsImageWidget(
                 imageList: imageList[2],
-                margin: EdgeInsets.only(bottom: 25,top: 50),
+                margin: EdgeInsets.only(bottom: 25, top: 50),
                 size: Size(size.width * 0.4, size.width * 0.6),
                 radius: 5,
               ),
@@ -197,7 +197,6 @@ class DownloadsImageWidget extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(radius),
           child: Container(
-           
             width: size.width,
             height: size.height,
             decoration: BoxDecoration(
