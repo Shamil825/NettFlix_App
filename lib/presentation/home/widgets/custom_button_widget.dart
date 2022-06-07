@@ -9,11 +9,13 @@ class CustomButtonWidget extends StatelessWidget {
     required this.title,
     this.iconSize=30,
     this.textSize=18,
+    this.textcolor=Colors.white,
   }) : super(key: key);
   final IconData icon;
   final String title;
   final double iconSize;
   final double textSize;
+  final Color textcolor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class CustomButtonWidget extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(fontSize:textSize),
+          style: TextStyle(fontSize:textSize,color: textcolor),
         ),
       ],
     );

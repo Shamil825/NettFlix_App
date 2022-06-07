@@ -1,0 +1,102 @@
+[1mdiff --git a/lib/presentation/home/widgets/custom_button_widget.dart b/lib/presentation/home/widgets/custom_button_widget.dart[m
+[1mindex 575468a..1510516 100644[m
+[1m--- a/lib/presentation/home/widgets/custom_button_widget.dart[m
+[1m+++ b/lib/presentation/home/widgets/custom_button_widget.dart[m
+[36m@@ -9,11 +9,13 @@[m [mclass CustomButtonWidget extends StatelessWidget {[m
+     required this.title,[m
+     this.iconSize=30,[m
+     this.textSize=18,[m
+[32m+[m[32m    this.textcolor=Colors.white,[m
+   }) : super(key: key);[m
+   final IconData icon;[m
+   final String title;[m
+   final double iconSize;[m
+   final double textSize;[m
+[32m+[m[32m  final Color textcolor;[m
+ [m
+   @override[m
+   Widget build(BuildContext context) {[m
+[36m@@ -26,7 +28,7 @@[m [mclass CustomButtonWidget extends StatelessWidget {[m
+         ),[m
+         Text([m
+           title,[m
+[31m-          style: TextStyle(fontSize:textSize),[m
+[32m+[m[32m          style: TextStyle(fontSize:textSize,color: textcolor),[m
+         ),[m
+       ],[m
+     );[m
+[1mdiff --git a/lib/presentation/new_and_hot/screen_new_and_hot.dart b/lib/presentation/new_and_hot/screen_new_and_hot.dart[m
+[1mindex 3593446..e4004cc 100644[m
+[1m--- a/lib/presentation/new_and_hot/screen_new_and_hot.dart[m
+[1m+++ b/lib/presentation/new_and_hot/screen_new_and_hot.dart[m
+[36m@@ -3,7 +3,9 @@[m [mimport 'package:netflix_app/core/colors/colors.dart';[m
+ import 'package:netflix_app/core/constatants.dart';[m
+ import 'package:netflix_app/presentation/home/widgets/custom_button_widget.dart';[m
+ import 'package:netflix_app/presentation/new_and_hot/widgets/comining_soon_widget.dart';[m
+[32m+[m[32mimport 'package:netflix_app/presentation/new_and_hot/widgets/everyones_watching_widget.dart';[m
+ import 'package:netflix_app/presentation/widgets/app_bar_widgets.dart';[m
+[32m+[m[32mimport 'package:netflix_app/presentation/widgets/video_widget.dart';[m
+ [m
+ class ScreenNewAndHot extends StatelessWidget {[m
+   const ScreenNewAndHot({Key? key}) : super(key: key);[m
+[36m@@ -67,6 +69,11 @@[m [mclass ScreenNewAndHot extends StatelessWidget {[m
+   }[m
+ [m
+   _buildEveryonesWatching() {[m
+[31m-    return SizedBox();[m
+[32m+[m[32m    return Padding([m
+[32m+[m[32m        padding: EdgeInsets.all(8),[m
+[32m+[m[32m        child: ListView.builder([m
+[32m+[m[32m          itemCount: 10,[m
+[32m+[m[32m          itemBuilder: (context, index) => EveryonesWatchingWidget(),[m
+[32m+[m[32m        ));[m
+   }[m
+ }[m
+[1mdiff --git a/lib/presentation/new_and_hot/widgets/comining_soon_widget.dart b/lib/presentation/new_and_hot/widgets/comining_soon_widget.dart[m
+[1mindex f77e26b..2b17819 100644[m
+[1m--- a/lib/presentation/new_and_hot/widgets/comining_soon_widget.dart[m
+[1m+++ b/lib/presentation/new_and_hot/widgets/comining_soon_widget.dart[m
+[36m@@ -3,6 +3,7 @@[m [mimport 'package:flutter/material.dart';[m
+ import 'package:netflix_app/core/colors/colors.dart';[m
+ import 'package:netflix_app/core/constatants.dart';[m
+ import 'package:netflix_app/presentation/home/widgets/custom_button_widget.dart';[m
+[32m+[m[32mimport 'package:netflix_app/presentation/widgets/video_widget.dart';[m
+ [m
+ class ComingSoonWidget extends StatelessWidget {[m
+   const ComingSoonWidget({[m
+[36m@@ -46,34 +47,7 @@[m [mclass ComingSoonWidget extends StatelessWidget {[m
+             child: Column([m
+               crossAxisAlignment: CrossAxisAlignment.start,[m
+               children: [[m
+[31m-                Stack([m
+[31m-                  children: [[m
+[31m-                    SizedBox([m
+[31m-                      width: double.infinity,[m
+[31m-                      height: 200,[m
+[31m-                      child: Image.network([m
+[31m-                        newAndHOtTempImage,[m
+[31m-                        fit: BoxFit.cover,[m
+[31m-                      ),[m
+[31m-                    ),[m
+[31m-                    Positioned([m
+[31m-                      bottom: 10,[m
+[31m-                      right: 10,[m
+[31m-                      child: CircleAvatar([m
+[31m-                        backgroundColor: Colors.black.withOpacity(0.5),[m
+[31m-                        radius: 22,[m
+[31m-                        child: IconButton([m
+[31m-                          onPressed: () {},[m
+[31m-                          icon: Icon([m
+[31m-                            Icons.volume_off,[m
+[31m-                            color: Colors.white,[m
+[31m-                            size: 20,[m
+[31m-                          ),[m
+[31m-                        ),[m
+[31m-                      ),[m
+[31m-                    ),[m
+[31m-                  ],[m
+[31m-                ),[m
+[32m+[m[32m                video_widget(),[m
+                 SizedBox([m
+                   height: 30,[m
+                 ),[m
