@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_app/application/downloads/downloads_bloc.dart';
 import 'package:netflix_app/core/colors/colors.dart';
 import 'package:netflix_app/core/constatants.dart';
 import 'package:netflix_app/presentation/widgets/app_bar_widgets.dart';
@@ -35,15 +37,16 @@ class ScreenDownloads extends StatelessWidget {
 
 class Section2 extends StatelessWidget {
   Section2({Key? key}) : super(key: key);
-  final List imageList = [
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/ekZobS8isE6mA53RAiGDG93hBxL.jpg",
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/lJA2RCMfsWoskqlQhXPSLFQGXEJ.jpg",
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/rjkmN1dniUHVYAtwuV3Tji7FsDO.jpg"
-  ];
 
   @override
   Widget build(BuildContext context) {
+    // WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    //    BlocProvider.of<DownloadsBloc>(context).add  (const DownloadsEvent.getDownloadsImage());
+    //  });
+    BlocProvider.of<DownloadsBloc>(context)
+        .add(const DownloadsEvent.getDownloadsImage());
     final Size size = MediaQuery.of(context).size;
+
     return Column(
       children: [
         const Text(
@@ -64,36 +67,40 @@ class Section2 extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 400,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              CircleAvatar(
-                radius: size.width * 0.38,
-                backgroundColor: Colors.grey.withOpacity(0.5),
+        BlocBuilder<DownloadsBloc, DownloadState>(
+          builder: (context, state) {
+            return SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 400,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: size.width * 0.38,
+                    backgroundColor: Colors.grey.withOpacity(0.5),
+                  ),
+                  DownloadsImageWidget(
+                    imageList: '$imageAppendUrl${state.downloads[0].posterPath}',
+                    margin: EdgeInsets.only(left: 170, top: 50),
+                    angle: 25,
+                    size: Size(size.width * 0.35, size.width * 0.55),
+                  ),
+                  DownloadsImageWidget(
+                    imageList:'$imageAppendUrl${state.downloads[1].posterPath}',
+                    margin: EdgeInsets.only(right: 170, top: 50),
+                    angle: -25,
+                    size: Size(size.width * 0.35, size.width * 0.55),
+                  ),
+                  DownloadsImageWidget(
+                    imageList: '$imageAppendUrl${state.downloads[2].posterPath}',
+                    margin: EdgeInsets.only(bottom: 25, top: 50),
+                    size: Size(size.width * 0.4, size.width * 0.6),
+                    radius: 5,
+                  ),
+                ],
               ),
-              DownloadsImageWidget(
-                imageList: imageList[0],
-                margin: EdgeInsets.only(left: 170, top: 50),
-                angle: 25,
-                size: Size(size.width * 0.35, size.width * 0.55),
-              ),
-              DownloadsImageWidget(
-                imageList: imageList[1],
-                margin: EdgeInsets.only(right: 170, top: 50),
-                angle: -25,
-                size: Size(size.width * 0.35, size.width * 0.55),
-              ),
-              DownloadsImageWidget(
-                imageList: imageList[2],
-                margin: EdgeInsets.only(bottom: 25, top: 50),
-                size: Size(size.width * 0.4, size.width * 0.6),
-                radius: 5,
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ],
     );
